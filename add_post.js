@@ -1,12 +1,13 @@
 const nameField = document.getElementById("name-field");
 const contentField = document.getElementById("content-field");
 
-console.log(nameField, contentField);
-
 function addPost() {
+  var postContent = contentField.value;
+  var authorName = nameField.value;
+
   var toSend = {
-    postContent: "test 123",
-    postCreatedBy: "Thunder client 123",
+    postContent: postContent,
+    postCreatedBy: authorName,
   };
   const jsonToString = JSON.stringify(toSend);
   fetch("http://localhost:3000/", {
@@ -15,7 +16,16 @@ function addPost() {
       "Content-Type": "application/json",
     },
     body: jsonToString,
-  });
+  })
+    .then(function (res) {
+      return res.text();
+    })
+    .then(function (v) {
+      console.log(v);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
 }
 
-addPost();
+// addPost("Test", "Hari Bahadur");
