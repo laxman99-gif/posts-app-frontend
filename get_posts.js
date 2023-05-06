@@ -40,6 +40,20 @@ function insertOnePost(authorName, postContent, date, postId) {
 
 // insertOnePost("Author Name", "Content", "hijo");
 
-function deletePost(postId){
-  console.log("Deleting " + postId) ;
+function deletePost(postId) {
+  console.log("Deleting " + postId);
+
+  fetch("http://localhost:3000/" + postId, {
+    method: "DELETE",
+  })
+    .then(function (res) {
+      return res.text();
+    })
+    .then(function (v) {
+      console.log(v);
+      window.location.reload() ;
+    })
+    .catch(function (e) {
+      console.log("error: " + e);
+    });
 }
