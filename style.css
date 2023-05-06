@@ -1,0 +1,25 @@
+body {
+  background-color: #ddd;
+}
+
+div#post-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 10px;
+}
+
+div.post {
+    background-color: rgba(0, 0, 0, 0.1);
+  margin: 15px;
+  border: 2px solid #eee;
+  box-shadow: 1px 2px 2px 4px #aaa;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+div.author {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
