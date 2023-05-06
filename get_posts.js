@@ -14,6 +14,7 @@ fetch("http://localhost:3000/")
         post.createdBy,
         //formatting date
         moment(post.createdAt).format("ddd, h:m A"),
+        post._id,
       );
     }
   })
@@ -21,13 +22,15 @@ fetch("http://localhost:3000/")
     console.log("Error fetching: " + error);
   });
 
-function insertOnePost(authorName, postContent, date) {
+function insertOnePost(authorName, postContent, date, postId) {
   var toInsert = ` <div class="post">
     <div>
         <div class="author">${authorName}</div>
         <div>on ${date}</div>
     </div>
     <div class="content">${postContent}</div>
+    <hr>
+    <button style='color: red' onclick="deletePost('${postId}')">Delete</button>
 </div>`;
 
   const container = document.getElementById("posts-container");
@@ -36,3 +39,21 @@ function insertOnePost(authorName, postContent, date) {
 }
 
 // insertOnePost("Author Name", "Content", "hijo");
+
+function deletePost(postId) {
+  console.log("Deleting " + postId);
+
+  fetch("http://localhost:3000/" + postId, {
+    method: "DELETE",
+  })
+    .then(function (res) {
+      return res.text();
+    })
+    .then(function (v) {
+      console.log(v);
+      window.location.reload() ;
+    })
+    .catch(function (e) {
+      console.log("error: " + e);
+    });
+}

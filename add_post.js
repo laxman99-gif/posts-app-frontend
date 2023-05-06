@@ -21,7 +21,7 @@ function addPost() {
       return res.text();
     })
     .then(function (v) {
-      console.log(v);
+      window.location.assign("./index.html");
     })
     .catch(function (error) {
       console.log(error);
