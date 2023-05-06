@@ -1,10 +1,8 @@
 const nameField = document.getElementById("name-field");
 const contentField = document.getElementById("content-field");
-
 function addPost() {
   var postContent = contentField.value;
   var authorName = nameField.value;
-
   var toSend = {
     postContent: postContent,
     postCreatedBy: authorName,
@@ -17,9 +15,6 @@ function addPost() {
     },
     body: jsonToString,
   })
-    .then(function (res) {
-      return res.text();
-    })
     .then(function (v) {
       window.location.assign("./index.html");
     })
@@ -27,5 +22,3 @@ function addPost() {
       console.log(error);
     });
 }
-
-// addPost("Test", "Hari Bahadur");
