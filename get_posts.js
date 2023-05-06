@@ -7,24 +7,32 @@ fetch("http://localhost:3000/")
 
     const jsonData = JSON.parse(jres);
 
-    console.log(jsonData);
+    for (var i = 0; i < jsonData.length; i++) {
+      var post = jsonData[i];
+      insertOnePost(
+        post.content,
+        post.createdBy,
+        //formatting date
+        moment(post.createdAt).format("ddd, h:m A"),
+      );
+    }
   })
   .catch(function (error) {
     console.log("Error fetching: " + error);
   });
 
-function insertOnePost() {
+function insertOnePost(authorName, postContent, date) {
   var toInsert = ` <div class="post">
     <div>
-        <div class="author">Shyam Karki</div>
-        <div>on 29 May, 2023</div>
+        <div class="author">${authorName}</div>
+        <div>on ${date}</div>
     </div>
-    <div class="content">Hello there, this is my first post.</div>
+    <div class="content">${postContent}</div>
 </div>`;
 
   const container = document.getElementById("posts-container");
 
-  container.insertAdjacentHTML("beforeend", toInsert);
+  container.insertAdjacentHTML("afterbegin", toInsert);
 }
 
-insertOnePost();
+// insertOnePost("Author Name", "Content", "hijo");
